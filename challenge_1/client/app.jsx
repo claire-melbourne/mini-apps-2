@@ -21,6 +21,7 @@ function App() {
     <div>
       <div>Find Historical Records</div>
       <Search searchRecordsByKeyword = { term => searchRecordsByKeyword(term) }/>
+      <SearchResults data= {data} />
     </div>
   );
 };

@@ -6,7 +6,11 @@ function SearchResults({ data }) {
     return null;
   }
   return (
-    {data.map(record => <HistoricalRecord record= {record} />)}
+
+    <div>
+      Search Results:
+      {data.map(record => <HistoricalRecord record= {record} />)}
+    </div>
   )
 };
 
