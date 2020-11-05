@@ -30,7 +30,6 @@ function App() {
 
   return (
     <div>
-      Cryptocurrency Values Over Time
       <PriceChart bpiData= {data}/>
     </div>
   )

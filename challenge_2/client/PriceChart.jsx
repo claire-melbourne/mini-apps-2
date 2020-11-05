@@ -8,7 +8,7 @@ function PriceChart({bpiData}) {
     const chart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: [new Date("2020-09-04").toLocaleString(), new Date("2020-10-04").toLocaleString(), new Date("2020-11-03").toLocaleString()],
+        // labels: [new Date("2020-09-04").toLocaleString(), new Date("2020-10-04").toLocaleString(), new Date("2020-11-03").toLocaleString()],
         datasets: [{
           label: 'Demo',
           data: bpiData,
@@ -32,9 +32,19 @@ function PriceChart({bpiData}) {
         }]
       },
       options: {
+        title: {
+          display: true,
+          text: 'BPI Values in US Dollars September - November 2020'
+        },
         scales: {
           xAxes: [{
             type: 'time'
+          }],
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Closing Values'
+            }
           }]
         }
       }
