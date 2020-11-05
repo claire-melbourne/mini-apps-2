@@ -8,9 +8,11 @@ function App() {
 
   const [data, setData] = useState([]);
   const [pageCount, setPageCount] = useState(0);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const searchRecordsByKeyword = (keyword) => {
-    console.log(`Received ${keyword} for search`)
+    setSearchTerm(keyword);
+    console.log(`Received ${keyword} for search`);
     axios.get(`http://localhost:3000/events?q=${keyword}&_limit=10&_page=1`)
     .then(res => {
       console.log('RESPONSE: ', res);
@@ -23,11 +25,22 @@ function App() {
     })
     .catch(err => console.error('ERROR: ', err))
   }
+
+  const getSelectedPage = (pageNum) => {
+    console.log(`Received ${pageNum} for request`);
+    axios.get(`http://localhost:3000/events?q=${searchTerm}&_limit=10&_page=${pageNum}`)
+    .then(res => {
+      console.log('RESPONSE: ', res);
+      setData(res.data);
+    })
+    .catch(err => console.error('ERROR: ', err))
+  }
+
   return (
     <div>
       <div>Find Historical Records</div>
       <Search searchRecordsByKeyword = { term => searchRecordsByKeyword(term) }/>
-      <SearchResults data= {data} pageCount= {pageCount}/>
+      <SearchResults data= {data} pageCount= {pageCount} getSelectedPage= { page => getSelectedPage(page) }/>
     </div>
   );
 };
