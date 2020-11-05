@@ -26,7 +26,6 @@ function SearchResults({ data, pageCount, getSelectedPage }) {
           onPageChange= { handlePageClick }
           marginPagesDisplayed={2}
           pageRangeDisplayed={5}
-          //don't know what the following do, but including for now for reference
           containerClassName={'pagination'}
           subContainerClassName={'pages pagination'}
           activeClassName={'active'}

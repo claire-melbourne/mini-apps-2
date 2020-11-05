@@ -19,7 +19,6 @@ function App() {
       var splitLinks = ('' + res.headers.link).split('page=');
       var lastPage = splitLinks[splitLinks.length - 1].split('>')[0];
       setPageCount(lastPage);
-      //var lastPage = splitLinks[splitLinks.length]
       console.log('RESPONSE LINKS Last page: ', lastPage)
       setData(res.data);
     })
