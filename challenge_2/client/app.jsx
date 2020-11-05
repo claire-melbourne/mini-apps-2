@@ -1,23 +1,37 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import PriceChart from './PriceChart.jsx'
 
 function App() {
+  const [data, setData] = useState(null);
+  const parseData = (data) => {
+    let parsedData = [];
+    for (var date in data) {
+      let coordObj = {};
+      coordObj.t = new Date(date);
+      coordObj.y = data[date];
+      console.log('coordinates:', coordObj);
+      parsedData.push(coordObj);
+    }
+    console.log('parsedData: ', parsedData)
+    setData(parsedData);
+  };
 
-  const getCurrencyValues = () => {
+  useEffect(() => {
     axios.get('/api/closingPrices')
     .then((res) => {
-      console.log('values retrieved: ', res);
+      console.log('values retrieved: ', res.data);
+      parseData(res.data)
     })
     .catch(err => console.error('Unable to access data at this time')
     )
-  };
+  }, [])
 
   return (
     <div>
       Cryptocurrency Values Over Time
-      <PriceChart />
+      <PriceChart bpiData= {data}/>
     </div>
   )
 }
